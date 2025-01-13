@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse des Cinémas</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Analyse des Cinémas</h1>
+    </header>
+
+    <section>
+        <h2>Étape 1 : Statistiques Descriptives</h2>
+        <div class="stats">
+            {{ stats|safe }}
+        </div>
+        <h3>Graphique des 10 premières communes</h3>
+        <img src="{{ image_path }}" alt="Graphique Exploration" class="image">
+    </section>
+
+    <section>
+        <h2>Étape 2 : Entrées Moyennes par Fauteuil</h2>
+        <h3>Graphique des Top 10 Communes</h3>
+        <img src="{{ image_path1 }}" alt="Graphique Top 10 Fauteuils" class="image">
+        <h3>Meilleures Communes</h3>
+        <ul class="communes">
+            {% for commune, valeur in meilleures_communes.items() %}
+            <li>{{ commune }} : {{ valeur }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Pires Communes</h3>
+        <ul class="communes">
+            {% for commune, valeur in pires_communes.items() %}
+            <li>{{ commune }} : {{ valeur }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h2>Étape 3 : Corrélations</h2>
+        <p>Corrélation entre Écrans et Entrées : <strong>{{ corr_ecrans }}</strong></p>
+        <p>Corrélation entre Fauteuils et Entrées : <strong>{{ corr_fauteuils }}</strong></p>
+        <h3>Graphiques de Corrélation</h3>
+        <img src="{{ image_path2 }}" alt="Corrélation Écrans vs Entrées" class="image">
+        <img src="{{ image_path3 }}" alt="Corrélation Fauteuils vs Entrées" class="image">
+        <p><strong>Conclusion :</strong> {{ conclusion_corr }}</p>
+    </section>
+
+    <section>
+        <h2>Étape 4 : Évaluation du Modèle de Régression</h2>
+        <p>Coefficient de Détermination (R²) : <strong>{{ r2 }}</strong></p>
+        <p>Erreur Moyenne Absolue (MAE) : <strong>{{ mae }}</strong></p>
+    </section>
+
+    <section>
+        <h2>Étape 5 : Prédiction pour une Commune Fictive</h2>
+        <p>Entrées Prévues : <strong>{{ prediction }}</strong></p>
+        <p><strong>Recommandation :</strong> {{ strategie }}</p>
+        
+    </section>
+   
+</body>
+</html>
